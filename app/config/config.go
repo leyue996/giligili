@@ -11,6 +11,7 @@ type Conf struct {
 	Mysql       mysql  `yaml:"mysql"`
 	Redis       redis  `yaml:"redis"`
 	GinMode     string `yaml:"gin_mode"`
+	Path        path   `yaml:"path"`
 }
 
 func (c *Conf) ConfInit() {

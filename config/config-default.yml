@@ -14,3 +14,6 @@ redis:
   redisPw :
   redisDbName :
 gin_mode: debug
+
+path:
+  avatarPath : /static/imgs/avatar/

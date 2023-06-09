@@ -4,12 +4,14 @@ import (
 	"giligili/app/http/api"
 	"giligili/app/http/middleware"
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 func NewRouter() *gin.Engine {
 	r := gin.Default()
 
-	r.Use(middleware.Cors()) //加载中间件
+	r.Use(middleware.Cors())                    //加载中间件
+	r.StaticFS("/static", http.Dir("./static")) //加载静态文件
 
 	v1 := r.Group("api/v1")
 	{

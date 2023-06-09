@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"giligili/app"
 	"giligili/app/http/dao"
 	"giligili/app/http/model"
 	"giligili/app/http/pkg/e"
@@ -55,6 +56,7 @@ func (service *UserRegisterService) Register(ctx context.Context) serializer.Res
 	user.UserName = service.UserName
 	user.Nickname = service.NickName
 	user.Status = model.Active
+	user.Avatar = app.Config.HttpService.Lister + app.Config.Path.AvatarPath + "avatar.JPG"
 
 	//log.Println(user)
 	err = userDao.CreateUser(&user)
