@@ -7,9 +7,12 @@ import (
 )
 
 func NewServer() error {
-	r := gin.Default()
-
-	routers.NewRouter(r)
+	r := routers.NewRouter()
+	if app.Config.GinMode == "debug" {
+		gin.SetMode(gin.DebugMode)
+	} else {
+		gin.SetMode(gin.ReleaseMode)
+	}
 
 	return r.Run(app.Config.HttpService.Lister)
 }

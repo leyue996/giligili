@@ -1,12 +1,19 @@
 package routers
 
 import (
+	"giligili/app/http/api"
+	"giligili/app/http/middleware"
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
 
-func NewRouter(r *gin.Engine) {
-	r.GET("ping", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"msg": "pong"})
-	})
+func NewRouter() *gin.Engine {
+	r := gin.Default()
+
+	r.Use(middleware.Cors()) //加载中间件
+
+	v1 := r.Group("api/v1")
+	{
+		v1.GET("ping", api.Ping)
+	}
+	return r
 }

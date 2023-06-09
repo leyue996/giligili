@@ -7,12 +7,10 @@ import (
 )
 
 func main() {
-	err := app.Init() //加载静态配置文件
-	if err != nil {
-		log.Println(err)
-	}
+	app.Init() //加载静态配置文件
+
 	//fmt.Println(app.Config)
-	err = server.NewServer()
+	err := server.NewServer()
 	if err != nil {
 		log.Println(err)
 	}

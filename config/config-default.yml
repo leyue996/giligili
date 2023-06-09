@@ -7,10 +7,10 @@ mysql:
   dbPort : 3306
   dbUser : mangosteen
   dbPassWord : 123456
-  dbName : mall_db_tmp
+  dbName : giligili_go
 redis:
   redisDb : redis
   redisAddr : localhost:6379
   redisPw :
   redisDbName :
-
+gin_mode: debug
