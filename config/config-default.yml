@@ -1,0 +1,16 @@
+server:
+  lister: "localhost:8080"
+
+mysql:
+  db : mysql
+  dbHost : localhost
+  dbPort : 3306
+  dbUser : mangosteen
+  dbPassWord : 123456
+  dbName : mall_db_tmp
+redis:
+  redisDb : redis
+  redisAddr : localhost:6379
+  redisPw :
+  redisDbName :
+
