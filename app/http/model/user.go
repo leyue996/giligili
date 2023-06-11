@@ -10,7 +10,7 @@ type User struct {
 	gorm.Model
 	UserName       string `gorm:"unique"`
 	PasswordDigest string
-	Nickname       string
+	NickName       string `gorm:"column:nick_name"`
 	Status         string
 	Avatar         string `gorm:"size:1000"`
 }

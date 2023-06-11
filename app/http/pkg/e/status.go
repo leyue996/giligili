@@ -18,6 +18,8 @@ const (
 	ErrorRegisterPasswordEncryption = 40002
 	ErrorLoginUserName              = 40003
 	ErrorLoginPassword              = 40004
+	ErrorNewPassword                = 40005
+	ErrorUserUpdate                 = 40006
 
 	ErrorVideoShow   = 43000
 	ErrorVideoUpdate = 43001

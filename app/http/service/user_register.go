@@ -54,7 +54,7 @@ func (service *UserRegisterService) Register(ctx context.Context) serializer.Res
 		}
 	}
 	user.UserName = service.UserName
-	user.Nickname = service.NickName
+	user.NickName = service.NickName
 	user.Status = model.Active
 	user.Avatar = app.Config.HttpService.Lister + app.Config.Path.AvatarPath + "avatar.JPG"
 

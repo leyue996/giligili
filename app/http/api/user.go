@@ -2,6 +2,7 @@ package api
 
 import (
 	"giligili/app/http/pkg/e"
+	"giligili/app/http/pkg/util"
 	"giligili/app/http/service"
 	"github.com/gin-gonic/gin"
 )
@@ -25,4 +26,25 @@ func UserLogin(c *gin.Context) {
 		c.JSON(e.Error, ErrorResponse(err))
 	}
 
+}
+
+func UserUpdatePw(c *gin.Context) {
+	updateUserService := service.UpdateUserServicePw{}
+	claims, _ := util.ParseToken(c.GetHeader("access_token"))
+	if err := c.ShouldBind(&updateUserService); err == nil {
+		res := updateUserService.UserUpdatePw(c.Request.Context(), claims.Id, c.GetHeader("access_token"))
+		c.JSON(e.Success, res)
+	} else {
+		c.JSON(e.Error, ErrorResponse(err))
+	}
+}
+func UserUpdateNickName(c *gin.Context) {
+	updateUserServiceNickName := service.UpdateUserServiceNickName{}
+	claims, _ := util.ParseToken(c.GetHeader("access_token"))
+	if err := c.ShouldBind(&updateUserServiceNickName); err == nil {
+		res := updateUserServiceNickName.UserUpdateNickName(c.Request.Context(), claims.Id)
+		c.JSON(e.Success, res)
+	} else {
+		c.JSON(e.Error, ErrorResponse(err))
+	}
 }

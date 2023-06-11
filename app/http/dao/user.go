@@ -35,3 +35,7 @@ func (dao *UserDao) SelectUserByUserId(uId uint) (user *model.User, err error) {
 	err = dao.DB.Model(&model.User{}).Where("id=?", uId).First(&user).Error
 	return
 }
+func (dao *UserDao) UpdateUserById(user *model.User, uId uint) error {
+	//log.Println(user.NickName)
+	return dao.DB.Model(&model.User{}).Where("id=?", uId).Updates(&user).Error
+}

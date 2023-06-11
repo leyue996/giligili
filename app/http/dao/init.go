@@ -22,6 +22,7 @@ func Database(connRead string) {
 		&gorm.Config{
 			NamingStrategy: schema.NamingStrategy{
 				SingularTable: true, //命名字段后面不加s
+
 			}})
 	if err != nil {
 		return

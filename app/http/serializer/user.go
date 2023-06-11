@@ -18,7 +18,7 @@ func BuildUser(user *model.User) *User {
 	return &User{
 		ID:       user.ID,
 		UserName: user.UserName,
-		NickName: user.Nickname,
+		NickName: user.NickName,
 
 		Status:   user.Status,
 		Avatar:   user.Avatar,
