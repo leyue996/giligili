@@ -7,7 +7,10 @@ import "giligili/app/http/model"
 func migration() {
 	// 自动迁移模式
 	err := Db.Set("gorm:table_options", "charset=utf8mb4").
-		AutoMigrate(&model.User{})
+		AutoMigrate(
+			&model.User{},
+			&model.Video{},
+		)
 
 	if err != nil {
 		panic(err)

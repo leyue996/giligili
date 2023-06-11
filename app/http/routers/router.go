@@ -20,11 +20,16 @@ func NewRouter() *gin.Engine {
 		v1.POST("user/register", api.UserRegister)
 		v1.POST("user/login", api.UserLogin)
 
-		v1.POST("videos", api.CreateVideo)
 		v1.GET("video/:id", api.ShowVideo) //具体视频
 		v1.GET("videos", api.ListVideo)    //视频列表
-		v1.PUT("videos/:id", api.UpdateVideo)
-		v1.DELETE("videos/:id", api.DeleteVideo)
+		//登录保护
+		authed := v1.Group("/")
+		authed.Use(middleware.JWT())
+		{
+			authed.POST("video", api.CreateVideo)
+			authed.PUT("video/:id", api.UpdateVideo)
+			authed.DELETE("video/:id", api.DeleteVideo)
+		}
 	}
 	return r
 }
