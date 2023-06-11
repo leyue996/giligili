@@ -3,7 +3,6 @@ package service
 import (
 	"context"
 	"giligili/app/http/dao"
-	"giligili/app/http/model"
 	"giligili/app/http/pkg/e"
 	"giligili/app/http/pkg/util"
 	"giligili/app/http/serializer"
@@ -33,8 +32,8 @@ func (service *UserLoginService) Login(ctx context.Context) serializer.Response 
 			Msg:    e.GetMsg(code),
 		}
 	}
-	user := new(model.User)
-	user, err = userDao.SelectUserByUserName(service.UserName)
+
+	user, err := userDao.SelectUserByUserName(service.UserName)
 	if ok := user.CheckPassword(service.Password); !ok {
 		code = e.ErrorLoginPassword
 		return serializer.Response{

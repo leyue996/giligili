@@ -16,7 +16,7 @@ type UpdateUserServicePw struct {
 	PasswordNewConfirm string `form:"password_new_confirm" json:"password_new_confirm" binding:"required,min=8,max=40"`
 }
 
-func (service *UpdateUserServicePw) UserUpdatePw(ctx context.Context, uId uint, token string) serializer.Response {
+func (service *UpdateUserServicePw) UserUpdatePw(ctx context.Context, uId uint, claims *util.Claims) serializer.Response {
 	code := e.Success
 	userDao := dao.NewUserDao(ctx)
 	user, err := userDao.SelectUserByUserId(uId)
@@ -35,7 +35,7 @@ func (service *UpdateUserServicePw) UserUpdatePw(ctx context.Context, uId uint, 
 			Msg:    e.GetMsg(code),
 		}
 	}
-	err = user.SetPassword(service.Password)
+	err = user.SetPassword(service.PasswordNew)
 	if err != nil {
 		code = e.ErrorRegisterPasswordEncryption
 		return serializer.Response{
@@ -55,14 +55,11 @@ func (service *UpdateUserServicePw) UserUpdatePw(ctx context.Context, uId uint, 
 		}
 	}
 	//旧token设为过期
-	//
-	token, err = util.GenerateToken(user.ID, user.UserName)
+	claims.ExpireToken()
+
 	return serializer.Response{
 		Status: code,
 		Msg:    e.GetMsg(code),
-		Data: serializer.TokenData{
-			User:  serializer.BuildUser(user),
-			Token: token,
-		},
+		Data:   "重定向login",
 	}
 }

@@ -32,8 +32,10 @@ func UserUpdatePw(c *gin.Context) {
 	updateUserService := service.UpdateUserServicePw{}
 	claims, _ := util.ParseToken(c.GetHeader("access_token"))
 	if err := c.ShouldBind(&updateUserService); err == nil {
-		res := updateUserService.UserUpdatePw(c.Request.Context(), claims.Id, c.GetHeader("access_token"))
+		res := updateUserService.UserUpdatePw(c.Request.Context(), claims.Id, claims)
 		c.JSON(e.Success, res)
+		//重定向到登录
+		//c.Redirect(http.StatusFound, "login")
 	} else {
 		c.JSON(e.Error, ErrorResponse(err))
 	}

@@ -26,8 +26,9 @@ func (user *User) SetPassword(pw string) error {
 	if err != nil {
 		return err
 	}
+
 	user.PasswordDigest = string(bytes)
-	return nil
+	return err
 
 }
 

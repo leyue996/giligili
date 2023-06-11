@@ -28,6 +28,11 @@ func GenerateToken(uId uint, userName string) (string, error) {
 	tokenClaims := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	return tokenClaims.SignedString(jwtSecret)
 }
+func (claims *Claims) ExpireToken() {
+	nowTime := time.Now()
+	expireTime := nowTime.Add(-(48 * time.Hour))
+	claims.StandardClaims.ExpiresAt = expireTime.Unix()
+}
 
 // 验证token
 func ParseToken(token string) (*Claims, error) {

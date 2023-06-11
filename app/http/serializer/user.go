@@ -1,6 +1,9 @@
 package serializer
 
-import "giligili/app/http/model"
+import (
+	"giligili/app/http/model"
+	"log"
+)
 
 type User struct {
 	//给前端展示的数据
@@ -15,6 +18,7 @@ type User struct {
 }
 
 func BuildUser(user *model.User) *User {
+	log.Println(user.PasswordDigest)
 	return &User{
 		ID:       user.ID,
 		UserName: user.UserName,
